@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CipherGuard | Password Strength Checker &amp; Generator</title>
+<meta name="description" content="A professional cybersecurity tool to analyze password strength, detect vulnerabilities, and generate secure passwords in real time.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Bootstrap 5 (layout / grid / utilities only, fully re-themed) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ============================================================
+     ANIMATED BACKGROUND
+=============================================================== -->
+<div class="bg-aurora" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+=============================================================== -->
+<nav class="navbar navbar-expand-lg custom-navbar fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top">
+      <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+      <span class="brand-text">Cipher<span class="accent">Guard</span></span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="#checker">Checker</a></li>
+        <li class="nav-item"><a class="nav-link" href="#generator">Generator</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tips">Security Tips</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item">
+          <button id="themeToggle" class="theme-toggle-btn" title="Toggle Dark / Light Mode" aria-label="Toggle theme">
+            <i class="fa-solid fa-sun sun-icon"></i>
+            <i class="fa-solid fa-moon moon-icon"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION
+=============================================================== -->
+<header id="top" class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos>
+        <span class="pill-badge"><i class="fa-solid fa-lock"></i> Real-Time Security Analysis</span>
+        <h1 class="hero-title">
+          Know Exactly How <span class="gradient-text">Strong</span> Your Password Really Is
+        </h1>
+        <p class="hero-subtitle">
+          CipherGuard analyzes entropy, detects breached &amp; common passwords, spots
+          keyboard patterns, and estimates real-world crack time — instantly, and
+          entirely inside your browser session.
+        </p>
+        <div class="hero-cta">
+          <a href="#checker" class="btn btn-glow"><i class="fa-solid fa-magnifying-glass"></i>&nbsp; Check My Password</a>
+          <a href="#generator" class="btn btn-outline-glow"><i class="fa-solid fa-key"></i>&nbsp; Generate Secure Password</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <h3>11+</h3>
+            <p>Security Checks</p>
+          </div>
+          <div class="stat">
+            <h3>100%</h3>
+            <p>Runs Locally</p>
+          </div>
+          <div class="stat">
+            <h3>0</h3>
+            <p>Data Stored</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="hero-visual glass-card">
+          <div class="visual-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="visual-title">password_analysis.sh</span>
+          </div>
+          <div class="visual-body font-mono">
+            <p><span class="prompt">$</span> analyzing password<span class="cursor-blink">_</span></p>
+            <p class="line-dim">> Length check ......... <span class="ok">PASS</span></p>
+            <p class="line-dim">> Entropy calculation ... <span class="ok">42.8 bits</span></p>
+            <p class="line-dim">> Common password DB .... <span class="ok">CLEAR</span></p>
+            <p class="line-dim">> Keyboard pattern ...... <span class="ok">CLEAR</span></p>
+            <p class="line-dim">> Crack time estimate ... <span class="warn">3 Months</span></p>
+            <p class="line-dim">> Overall strength ...... <span class="ok">STRONG</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     FEATURE CARDS
+=============================================================== -->
+<section id="features" class="features-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="pill-badge">Capabilities</span>
+      <h2>Everything a Modern Password Auditor Needs</h2>
+      <p>Every check runs instantly in your browser session — nothing is ever saved or transmitted anywhere.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h4>Live Strength Meter</h4>
+          <p>Animated real-time score (0–100) that updates on every keystroke.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-dna"></i></div>
+          <h4>Entropy Engine</h4>
+          <p>Mathematical entropy scoring based on true character pool size.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+          <h4>Crack Time Estimate</h4>
+          <p>Realistic brute-force time estimation, from instant to millions of years.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-dice"></i></div>
+          <h4>Secure Generator</h4>
+          <p>Cryptographically secure password generation using CSPRNG.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <h4>Breach &amp; Common DB</h4>
+          <p>Instant detection of commonly leaked and dictionary passwords.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-keyboard"></i></div>
+          <h4>Pattern Detection</h4>
+          <p>Flags keyboard walks (qwerty, asdf) and sequences (1234, abcd).</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <h4>Smart Suggestions</h4>
+          <p>Actionable, prioritized feedback to strengthen weak passwords.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card glass-card">
+          <div class="feature-icon"><i class="fa-solid fa-circle-half-stroke"></i></div>
+          <h4>Dark / Light Mode</h4>
+          <p>A polished interface that adapts to your preferred viewing mode.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PASSWORD CHECKER SECTION
+=============================================================== -->
+<section id="checker" class="checker-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="pill-badge"><i class="fa-solid fa-bolt"></i> Real-Time</span>
+      <h2>Password Strength Checker</h2>
+      <p>Type a password below. Nothing is stored, logged, or sent anywhere beyond this local analysis.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="checker-card glass-card">
+
+          <label for="passwordInput" class="input-label">Enter Password</label>
+          <div class="password-input-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Start typing your password..." autocomplete="new-password" maxlength="128">
+            <button type="button" id="toggleVisibility" class="icon-btn" title="Show/Hide Password">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+            <button type="button" id="copyPassword" class="icon-btn" title="Copy Password">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+
+          <!-- Strength Meter -->
+          <div class="strength-meter-wrapper">
+            <div class="strength-meter-track">
+              <div id="strengthMeterFill" class="strength-meter-fill"></div>
+            </div>
+            <div class="strength-meta">
+              <span id="strengthLabel" class="strength-label">Enter a password to begin</span>
+              <span id="strengthScore" class="strength-score">0 / 100</span>
+            </div>
+          </div>
+
+          <!-- Common Password Warning -->
+          <div id="commonWarning" class="alert-banner d-none">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>This is one of the most commonly breached passwords. Change it immediately!</span>
+          </div>
+
+          <!-- Metrics Grid -->
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-icon"><i class="fa-solid fa-ruler"></i></span>
+              <div>
+                <p class="metric-label">Length</p>
+                <p id="metricLength" class="metric-value">0</p>
+              </div>
+            </div>
+            <div class="metric-box">
+              <span class="metric-icon"><i class="fa-solid fa-dna"></i></span>
+              <div>
+                <p class="metric-label">Entropy</p>
+                <p id="metricEntropy" class="metric-value">0 bits</p>
+              </div>
+            </div>
+            <div class="metric-box">
+              <span class="metric-icon"><i class="fa-solid fa-shield-halved"></i></span>
+              <div>
+                <p class="metric-label">Security</p>
+                <p id="metricSecurity" class="metric-value">0%</p>
+              </div>
+            </div>
+            <div class="metric-box">
+              <span class="metric-icon"><i class="fa-solid fa-layer-group"></i></span>
+              <div>
+                <p class="metric-label">Complexity</p>
+                <p id="metricComplexity" class="metric-value">—</p>
+              </div>
+            </div>
+            <div class="metric-box metric-box-wide">
+              <span class="metric-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+              <div>
+                <p class="metric-label">Estimated Crack Time</p>
+                <p id="metricCrackTime" class="metric-value">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Character Checklist -->
+          <div class="checklist-grid">
+            <div class="check-item" id="chkLower"><i class="fa-solid fa-circle-xmark"></i> Lowercase letters</div>
+            <div class="check-item" id="chkUpper"><i class="fa-solid fa-circle-xmark"></i> Uppercase letters</div>
+            <div class="check-item" id="chkNumber"><i class="fa-solid fa-circle-xmark"></i> Numbers</div>
+            <div class="check-item" id="chkSpecial"><i class="fa-solid fa-circle-xmark"></i> Special characters</div>
+            <div class="check-item" id="chkSequential"><i class="fa-solid fa-circle-xmark"></i> No sequential patterns</div>
+            <div class="check-item" id="chkKeyboard"><i class="fa-solid fa-circle-xmark"></i> No keyboard patterns</div>
+            <div class="check-item" id="chkRepeated"><i class="fa-solid fa-circle-xmark"></i> No repeated characters</div>
+            <div class="check-item" id="chkCommon"><i class="fa-solid fa-circle-xmark"></i> Not a common password</div>
+          </div>
+
+          <!-- Suggestions -->
+          <div class="suggestions-box">
+            <h5><i class="fa-solid fa-lightbulb"></i> Suggestions</h5>
+            <ul id="suggestionsList" class="suggestions-list">
+              <li>Start typing above to see personalized suggestions.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PASSWORD GENERATOR SECTION
+=============================================================== -->
+<section id="generator" class="generator-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="pill-badge"><i class="fa-solid fa-key"></i> Generator</span>
+      <h2>Secure Password Generator</h2>
+      <p>Generate cryptographically strong passwords tailored to your requirements.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="generator-card glass-card">
+
+          <div class="generated-output-wrapper">
+            <input type="text" id="generatedPasswordOutput" class="generated-output" readonly placeholder="Click Generate to create a password">
+            <button type="button" id="copyGenerated" class="icon-btn" title="Copy Password">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+
+          <div class="gen-strength-mini">
+            <div class="strength-meter-track">
+              <div id="genStrengthFill" class="strength-meter-fill"></div>
+            </div>
+            <span id="genStrengthLabel" class="strength-label">—</span>
+          </div>
+
+          <div class="slider-row">
+            <label for="lengthSlider">Password Length</label>
+            <span id="lengthValue" class="length-badge">16</span>
+          </div>
+          <input type="range" min="4" max="64" value="16" id="lengthSlider" class="custom-slider">
+
+          <div class="options-grid">
+            <label class="option-toggle">
+              <input type="checkbox" id="optUpper" checked>
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              Uppercase (A-Z)
+            </label>
+            <label class="option-toggle">
+              <input type="checkbox" id="optLower" checked>
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              Lowercase (a-z)
+            </label>
+            <label class="option-toggle">
+              <input type="checkbox" id="optNumbers" checked>
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              Numbers (0-9)
+            </label>
+            <label class="option-toggle">
+              <input type="checkbox" id="optSymbols" checked>
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              Symbols (!@#$)
+            </label>
+          </div>
+
+          <div class="generator-actions">
+            <button type="button" id="generateBtn" class="btn btn-glow"><i class="fa-solid fa-wand-magic-sparkles"></i>&nbsp; Generate</button>
+            <button type="button" id="regenerateBtn" class="btn btn-outline-glow"><i class="fa-solid fa-rotate"></i>&nbsp; Regenerate</button>
+          </div>
+
+          <p id="generatorError" class="error-text d-none">Please select at least one character type.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECURITY TIPS SECTION
+=============================================================== -->
+<section id="tips" class="tips-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="pill-badge"><i class="fa-solid fa-graduation-cap"></i> Best Practices</span>
+      <h2>Professional Security Tips</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-arrows-left-right-to-line"></i>
+          <h5>Use Passphrases</h5>
+          <p>Combine 4-5 unrelated words with symbols and numbers for high entropy that's still memorable.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-clone"></i>
+          <h5>Never Reuse Passwords</h5>
+          <p>Use a unique password for every account so one breach can't compromise everything.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-vault"></i>
+          <h5>Use a Password Manager</h5>
+          <p>Store unique, generated passwords securely instead of relying on memory.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h5>Enable 2FA / MFA</h5>
+          <p>Add a second layer of authentication wherever it's offered.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          <h5>Rotate Sensitive Credentials</h5>
+          <p>Change passwords for critical accounts periodically, especially after any breach news.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="tip-card glass-card">
+          <i class="fa-solid fa-user-secret"></i>
+          <h5>Avoid Personal Info</h5>
+          <p>Never use names, birthdays, or pet names — these are the first things attackers try.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT SECTION
+=============================================================== -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="pill-badge">About This Project</span>
+        <h2 class="about-title">Built as a Final-Year Cybersecurity Project</h2>
+        <p class="about-text">
+          CipherGuard demonstrates practical application of security principles —
+          entropy mathematics, pattern recognition, and secure random generation —
+          wrapped in a production-quality, fully responsive web interface.
+        </p>
+        <ul class="about-list">
+          <li><i class="fa-solid fa-check"></i> No database — 100% stateless &amp; session-based</li>
+          <li><i class="fa-solid fa-check"></i> No paid APIs or external services</li>
+          <li><i class="fa-solid fa-check"></i> Flask backend + Vanilla JS frontend</li>
+          <li><i class="fa-solid fa-check"></i> Fully responsive on all devices</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="glass-card about-card">
+          <i class="fa-solid fa-code about-card-icon"></i>
+          <h4>Tech Stack</h4>
+          <div class="tech-badges">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Flask</span>
+            <span>Bootstrap 5</span>
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+=============================================================== -->
+<footer class="footer-section">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="brand-text">Cipher<span class="accent">Guard</span></span>
+      </div>
+      <p class="footer-tagline">Analyze. Understand. Secure.</p>
+      <p class="footer-copy">&copy; 2026 CipherGuard — Final Year Computer Science Project. All analysis runs locally.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap Bundle JS (for navbar collapse only) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<!-- Custom Script -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
