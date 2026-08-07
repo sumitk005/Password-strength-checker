@@ -1,5 +1,7 @@
 # 🛡️ CipherGuard — Password Strength Checker
 
+Live Demo: https://password-strength-checker-qnae.onrender.com
+
 A complete, production-quality final-year Computer Science project that analyzes
 password strength in real time, detects security vulnerabilities, and generates
 cryptographically secure passwords — all running **100% locally** with **no
