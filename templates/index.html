@@ -5,7 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CipherGuard | Password Strength Checker &amp; Generator</title>
 <meta name="description" content="A professional cybersecurity tool to analyze password strength, detect vulnerabilities, and generate secure passwords in real time.">
-<meta name="google-site-verification" content="zufK_Hgs1-XfqhssGZJmu0tyCIDWKX9n313B7dn9WcY" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+
+<!-- Open Graph / Social Preview (controls the site name + preview card shown when the link is shared) -->
+<meta property="og:site_name" content="CipherGuard">
+<meta property="og:title" content="CipherGuard | Password Strength Checker &amp; Generator">
+<meta property="og:description" content="A professional cybersecurity tool to analyze password strength, detect vulnerabilities, and generate secure passwords in real time.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ url_for('static', filename='og-image-icon.png', _external=True) }}">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a0e17">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
