@@ -371,6 +371,17 @@ def generate_password(length=16, use_upper=True, use_lower=True,
 # ROUTES
 # -------------------------------------------------------------------
 
+@app.route("/robots.txt")
+def robots_txt():
+    """
+    Explicitly allows all search engine crawlers to index the site.
+    Having this route removes any ambiguity for Googlebot, especially
+    important on free hosting tiers where the app may briefly sleep.
+    """
+    content = "User-agent: *\nAllow: /\nSitemap: " + request.url_root + "sitemap.xml\n"
+    return content, 200, {"Content-Type": "text/plain"}
+
+
 @app.route("/")
 def index():
     """Renders the main single-page application."""
@@ -449,6 +460,6 @@ def internal_error(e):
 
 
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))
-    app.run(debug=False, host="0.0.0.0", port=port)
+    # debug=True is fine for local academic/project use.
+    # Set to False before any real deployment.
+    app.run(debug=True, host="127.0.0.1", port=5000)
