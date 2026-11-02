@@ -1,16 +1,3 @@
-"""
-Password Strength Checker - Backend (Flask)
-=============================================
-A production-quality Flask backend that powers a real-time password
-strength analysis and secure password generation tool.
-
-No database is used. No external/paid APIs are used.
-Everything runs 100% locally using pure Python logic.
-
-Author : Final Year CS Project
-Module : app.py (Main Flask Application)
-"""
-
 import re
 import math
 import secrets
