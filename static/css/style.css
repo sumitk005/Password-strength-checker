@@ -8,7 +8,7 @@
    1. ROOT VARIABLES — THEME SYSTEM
 --------------------------------------------------------------------- */
 :root[data-theme="dark"] {
-  --bg-base: black;
+  --bg-base: #0a0e17;
   --bg-secondary: #0f1420;
   --text-primary: #eef2ff;
   --text-secondary: #9aa4c2;
